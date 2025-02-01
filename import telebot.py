@@ -49,50 +49,48 @@ async def handle_start(message: types.Message):
     except Exception as e:
         await message.reply(f"Произошла ошибка при отправке изображения: {e}")
 
-@dp.callback_query_handler(lambda call: True)
-async def callback_inline(call: types.CallbackQuery):
-    if call.data == 'adon':
-        await bot.edit_message_caption(
-            chat_id=call.message.chat.id,
-            message_id=call.message.message_id,
-            caption='Вы выбрали адоны для Calamity',
-            reply_markup=adon_menu
-        )
-        
-    elif call.data == 'klass': 
-        await bot.edit_message_caption(
-            chat_id=call.message.chat.id,
-            message_id=call.message.message_id,
-            caption='Вы выбрали классы в Calamity',
-            reply_markup=klass_menu
-        )
-    
-    elif call.data == 'back':
-        await bot.edit_message_reply_markup(
-            chat_id=call.message.chat.id,
-            message_id=call.message.message_id,
-            reply_markup=main_menu
-        )
+@dp.callback_query_handler(lambda call: call.data == 'adon')
+async def callback_adon(call: types.CallbackQuery):
+    await call.message.edit_caption(
+        caption='Вы выбрали адоны для Calamity',
+        reply_markup=adon_menu
+    )
 
-    elif call.data == 'shooter':
-        with open('photo_2025-01-22_19-34-58.jpg', 'rb') as photo:
-            await bot.send_photo(chat_id=call.message.chat.id, photo=photo)
-    
-    elif call.data == 'warrior':
-        with open('воин.jpg', 'rb') as photo:
-            await bot.send_photo(chat_id=call.message.chat.id, photo=photo)
+@dp.callback_query_handler(lambda call: call.data == 'klass')
+async def callback_klass(call: types.CallbackQuery):
+    await call.message.edit_caption(
+        caption='Вы выбрали классы в Calamity',
+        reply_markup=klass_menu
+    )
 
-    elif call.data == 'mag':
-        with open('маг.jpg', 'rb') as photo:
-            await bot.send_photo(chat_id=call.message.chat.id, photo=photo)
-    
-    elif call.data == 'summoner':
-        with open('призыв.jpg', 'rb') as photo:
-            await bot.send_photo(chat_id=call.message.chat.id, photo=photo)
+@dp.callback_query_handler(lambda call: call.data == 'back')
+async def callback_back(call: types.CallbackQuery):
+    await call.message.edit_reply_markup(reply_markup=main_menu)
 
-    elif call.data == 'rogue':
-        with open('разбойник.jpg', 'rb') as photo:
-            await bot.send_photo(chat_id=call.message.chat.id, photo=photo)
+@dp.callback_query_handler(lambda call: call.data == 'shooter')
+async def callback_shooter(call: types.CallbackQuery):
+    with open('photo_2025-01-22_19-34-58.jpg', 'rb') as photo:
+        await bot.send_photo(chat_id=call.message.chat.id, photo=photo)
+
+@dp.callback_query_handler(lambda call: call.data == 'warrior')
+async def callback_warrior(call: types.CallbackQuery):
+    with open('воин.jpg', 'rb') as photo:
+        await bot.send_photo(chat_id=call.message.chat.id, photo=photo)
+
+@dp.callback_query_handler(lambda call: call.data == 'mag')
+async def callback_mag(call: types.CallbackQuery):
+    with open('маг.jpg', 'rb') as photo:
+        await bot.send_photo(chat_id=call.message.chat.id, photo=photo)
+
+@dp.callback_query_handler(lambda call: call.data == 'summoner')
+async def callback_summoner(call: types.CallbackQuery):
+    with open('призыв.jpg', 'rb') as photo:
+        await bot.send_photo(chat_id=call.message.chat.id, photo=photo)
+
+@dp.callback_query_handler(lambda call: call.data == 'rogue')
+async def callback_rogue(call: types.CallbackQuery):
+    with open('разбойник.jpg', 'rb') as photo:
+        await bot.send_photo(chat_id=call.message.chat.id, photo=photo)
 
 if __name__ == "__main__":
-    executor.start_polling(dp, skip_updates=True)
+    executor.start_polling(dp, skip_updates=True)       
