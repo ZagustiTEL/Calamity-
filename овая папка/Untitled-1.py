@@ -77,6 +77,42 @@ button_kalamitas = types.InlineKeyboardButton(text='Высшая ведьма, �
 button_back_ = types.InlineKeyboardButton(text='Назад', callback_data='back_boss')
 boss_menu_posmun.add(button_starzi, button_dragon, button_providens, button_starzi_god, button_poltergast, button_star_ges, button_dog, button_yron, button_mehi, button_kalamitas, button_back_)
 
+# классы
+
+warrior_menu = types.InlineKeyboardMarkup(row_width=2)
+button_start_warrior = types.InlineKeyboardButton(text='Начало игры', callback_data='start_warrior')
+button_medium_warrior = types.InlineKeyboardButton(text='Средина игры', callback_data='midle_warrior')
+button_endgm_warrior = types.InlineKeyboardButton(text='Конец игры', callback_data='end_warrior')
+bitton_back_klass = types.InlineKeyboardButton(text='Назад', callback_data='back_klass')
+warrior_menu.add(button_start_warrior, button_medium_warrior, button_endgm_warrior, bitton_back_klass)
+
+shooter_menu = types.InlineKeyboardMarkup(row_width=2)
+button_start_shooter = types.InlineKeyboardButton(text='Начало игры', callback_data='start_shooter')
+button_medium_shooter = types.InlineKeyboardButton(text='Средина игры', callback_data='midle_shooter')
+button_endgm_shooter = types.InlineKeyboardButton(text='Конец игры', callback_data='end_shooter')
+bitton_back_klass = types.InlineKeyboardButton(text='Назад', callback_data='back_klass')
+shooter_menu.add(button_start_shooter, button_medium_shooter, button_endgm_shooter, bitton_back_klass)
+
+rogue_menu = types.InlineKeyboardMarkup(row_width=2)
+button_start_rogue = types.InlineKeyboardButton(text='Начало игры', callback_data='start_rogue')
+button_medium_rogue = types.InlineKeyboardButton(text='Средина игры', callback_data='midle_rogue')
+button_endgm_rogue = types.InlineKeyboardButton(text='Конец игры', callback_data='end_rogue')
+bitton_back_klass = types.InlineKeyboardButton(text='Назад', callback_data='back_klass')
+rogue_menu.add(button_start_rogue, button_medium_rogue, button_endgm_rogue, bitton_back_klass)
+
+mag_menu = types.InlineKeyboardMarkup(row_width=2)
+button_start_mag = types.InlineKeyboardButton(text='Начало игры', callback_data='start_mag')
+button_medium_mag = types.InlineKeyboardButton(text='Средина игры', callback_data='midle_mag')
+button_endgm_mag = types.InlineKeyboardButton(text='Конец игры', callback_data='end_mag')
+bitton_back_klass = types.InlineKeyboardButton(text='Назад', callback_data='back_klass')
+mag_menu.add(button_start_mag, button_medium_mag, button_endgm_mag, bitton_back_klass)
+
+summoner_menu = types.InlineKeyboardMarkup(row_width=2)
+button_start_summoner = types.InlineKeyboardButton(text='Начало игры', callback_data='start_summoner')
+button_medium_summoner = types.InlineKeyboardButton(text='Средина игры', callback_data='midle_summoner')
+button_endgm_summoner = types.InlineKeyboardButton(text='Конец игры', callback_data='end_summoner')
+bitton_back_klass = types.InlineKeyboardButton(text='Назад', callback_data='back_klass')
+summoner_menu.add(button_start_summoner, button_medium_summoner, button_endgm_summoner, bitton_back_klass)
 
 @bot.message_handler(commands=['start'])
 def handle_start(message):
@@ -146,6 +182,41 @@ def callback_inline(call):
                                  caption='Меню пост-мунлордных боссов',
                                  reply_markup=boss_menu_posmun)
     
+    elif call.data == 'back_klass':
+        bot.edit_message_caption(chat_id=call.message.chat.id,
+                             message_id=call.message.message_id,
+                             caption='Вы вернулись к классам:',
+                             reply_markup=klass_menu)
+
+    elif call.data == 'warrior':
+        bot.edit_message_caption(chat_id=call.message.chat.id,
+                                 message_id=call.message.message_id,
+                                 caption='Воин',
+                                 reply_markup=warrior_menu)
+    
+    elif call.data == 'shooter':
+        bot.edit_message_caption(chat_id=call.message.chat.id,
+                                 message_id=call.message.message_id,
+                                 caption='Стрелок',
+                                 reply_markup=shooter_menu)
+
+    elif call.data == 'mag':
+        bot.edit_message_caption(chat_id=call.message.chat.id,
+                                 message_id=call.message.message_id,
+                                 caption='Маг',
+                                 reply_markup=mag_menu)
+
+    elif call.data == 'summoner':
+        bot.edit_message_caption(chat_id=call.message.chat.id,
+                                 message_id=call.message.message_id,
+                                 caption='Призыватель',
+                                 reply_markup=summoner_menu)
+                                
+    elif call.data == 'rogue':
+        bot.edit_message_caption(chat_id=call.message.chat.id,
+                                 message_id=call.message.message_id,
+                                 caption='Разбойник',
+                                 reply_markup=rogue_menu)
     
 
 # Классы в начало
@@ -167,6 +238,48 @@ def callback_inline(call):
 
     elif call.data == 'start_rogue':
         with open('классы/разбойник/разбойник.jpg', 'rb') as photo:
+            bot.send_photo(chat_id=call.message.chat.id, photo=photo)
+
+# Классы середина
+    elif call.data == 'midle_shooter':
+        with open('классы/стрелок/1.jpg', 'rb') as photo:
+            bot.send_photo(chat_id=call.message.chat.id, photo=photo)
+
+    elif call.data == 'midle_warrior':
+        with open('классы/воин/8.jpg', 'rb') as photo:
+            bot.send_photo(chat_id=call.message.chat.id, photo=photo)
+
+    elif call.data =='midle_mag':
+        with open('классы/маг/photo_2025-02-04_17-25-46.jpg', 'rb') as photo:
+            bot.send_photo(chat_id=call.message.chat.id, photo=photo)
+    
+    elif call.data =='midle_summoner':
+        with open('классы/призыв/photo_2025-02-04_17-26-52.jpg', 'rb') as photo:
+            bot.send_photo(chat_id=call.message.chat.id, photo=photo)
+
+    elif call.data =='midle_rogue':
+        with open('классы/разбойник/1.jpg', 'rb') as photo:
+            bot.send_photo(chat_id=call.message.chat.id, photo=photo)
+            
+# Классы конец
+    elif call.data == 'end_shooter':
+        with open('классы/стрелок/rjytw.jpg', 'rb') as photo:
+            bot.send_photo(chat_id=call.message.chat.id, photo=photo)
+
+    elif call.data == 'end_warrior':
+        with open('классы/воин/11.jpg', 'rb') as photo:
+            bot.send_photo(chat_id=call.message.chat.id, photo=photo)
+
+    elif call.data == 'end_mag':
+        with open('классы/маг/2.jpg', 'rb') as photo:
+            bot.send_photo(chat_id=call.message.chat.id, photo=photo)
+    
+    elif call.data == 'end_summoner':
+        with open('классы/призыв/2.jpg', 'rb') as photo:
+            bot.send_photo(chat_id=call.message.chat.id, photo=photo)
+
+    elif call.data == 'end_rogue':
+        with open('классы/разбойник/photo_2025-02-04_17-24-35.jpg', 'rb') as photo:
             bot.send_photo(chat_id=call.message.chat.id, photo=photo)
     
 # Пре-хардмодные боссы
