@@ -2,7 +2,6 @@ import os
 import telebot
 from telebot import types
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
-from telebot.types import InputMediaPhoto
 
 TOKEN = '7737738429:AAE4itTACHj3DT3XBTQX9UFY-Txts6LKYWg'
 
